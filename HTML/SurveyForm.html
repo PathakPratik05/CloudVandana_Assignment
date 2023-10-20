@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Survey Form By Pratik</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        .form-container {
+            width: 60%;
+            margin: 0 auto;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form-container">
+        <h2>Survey Form</h2>
+        <form id="survey-form">
+            <label for="first-name">First Name:</label>
+            <input type="text" id="first-name" required><br><br>
+
+            <label for="last-name">Last Name:</label>
+            <input type="text" id="last-name" required><br><br>
+
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" required><br><br>
+
+            <label for="country">Country:</label>
+            <select id="country" required>
+                <option value="India">India</option>
+                <option value="South Africa">South Africa</option>
+                <option value="Newzeland">Newzeland</option>
+                <option value="England">England</option>
+                <option value="USA">USA</option>
+            </select><br><br>
+
+            <label>Gender:</label><br>
+            <input type="checkbox" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+            <input type="checkbox" id="female" name="gender" value="Female">
+            <label for="female">Female</label><br><br>
+
+            <label for="profession">Profession:</label>
+            <input type="text" id="profession" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" required><br><br>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="tel" id="mobile" required><br><br>
+
+            <button type="submit" id="submit-button">Submit</button>
+            <button type="reset" id="reset-button">Reset</button>
+        </form>
+    </div>
+
+    <!-- Popup to display form data -->
+    <div class="popup" id="result-popup">
+        <div class="popup-content">
+            <h3>Survey Form Data:</h3>
+            <div id="popup-data"></div>
+            <button id="close-popup">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('survey-form');
+        const resultPopup = document.getElementById('result-popup');
+        const popupData = document.getElementById('popup-data');
+
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            let popupHTML = '';
+            for (const pair of formData.entries()) {
+                popupHTML += `<p><strong>${pair[0]}:</strong> ${pair[1]}</p>`;
+            }
+            popupData.innerHTML = popupHTML;
+            resultPopup.style.display = 'block';
+        });
+
+        document.getElementById('close-popup').addEventListener('click', function () {
+            resultPopup.style.display = 'none';
+            form.reset();
+        });
+    </script>
+</body>
+
+</html>
